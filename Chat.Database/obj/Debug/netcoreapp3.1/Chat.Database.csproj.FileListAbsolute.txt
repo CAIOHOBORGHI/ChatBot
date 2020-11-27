@@ -1,0 +1,4 @@
+D:\projetoscaio\Pessoais\chat\ChatBot\Chat.Database\obj\Debug\netcoreapp3.1\Chat.Database.csprojAssemblyReference.cache
+D:\projetoscaio\Pessoais\chat\ChatBot\Chat.Database\obj\Debug\netcoreapp3.1\Chat.Database.AssemblyInfoInputs.cache
+D:\projetoscaio\Pessoais\chat\ChatBot\Chat.Database\obj\Debug\netcoreapp3.1\Chat.Database.AssemblyInfo.cs
+D:\projetoscaio\Pessoais\chat\ChatBot\Chat.Database\obj\Debug\netcoreapp3.1\Chat.Database.csproj.CoreCompileInputs.cache
