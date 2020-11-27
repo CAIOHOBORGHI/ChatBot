@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
-using Chat.Database.Models;
+using Chat.Core.Models;
 
 namespace Chat.Database
 {
@@ -16,7 +16,6 @@ namespace Chat.Database
             /* Creates initial tables in docker database */
             Database.Migrate();
         }
-
 
         #region Tables
         public DbSet<ChatUser> ChatUsers { get; set; }

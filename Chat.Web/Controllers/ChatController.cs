@@ -11,15 +11,16 @@ using System.Threading.Tasks;
 namespace Chat.Web.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class HomeController : Controller
+    public class ChatController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ChatController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();

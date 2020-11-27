@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Chat.Database.Models
+namespace Chat.Core.Models
 {
     public class Message
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Chat.Database.Models
+namespace Chat.Core.Models
 {
     public class ChatUser : IdentityUser
     {
