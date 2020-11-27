@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
+using Chat.Database.Models;
 
 namespace Chat.Database
 {
@@ -34,7 +35,7 @@ namespace Chat.Database
                 .Entity<Message>()
                 .HasOne<ChatUser>(message => message.Writter)
                 .WithMany(user => user.Messages)
-                .HasForeignKey(user => user.UserID);
+                .HasForeignKey(user => user.UserId);
             #endregion
         }
     }

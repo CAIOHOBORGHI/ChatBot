@@ -1,33 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Web\\Chat.Web.csproj": {}
+    "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/Chat.Web.csproj": {}
   },
   "projects": {
-    "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Database\\Chat.Database.csproj": {
+    "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/Chat.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Database\\Chat.Database.csproj",
+        "projectUniqueName": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/Chat.Database.csproj",
         "projectName": "Chat.Database",
-        "projectPath": "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Database\\Chat.Database.csproj",
-        "packagesPath": "C:\\Users\\caioh\\.nuget\\packages\\",
-        "outputPath": "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Database\\obj\\",
+        "projectPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/Chat.Database.csproj",
+        "packagesPath": "/Users/caioborghi/.nuget/packages/",
+        "outputPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\caioh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/Users/caioborghi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://nuget.grapecity.com/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -53,6 +48,26 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -65,47 +80,48 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.100-rc.2.20479.15/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Web\\Chat.Web.csproj": {
+    "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/Chat.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Web\\Chat.Web.csproj",
+        "projectUniqueName": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/Chat.Web.csproj",
         "projectName": "Chat.Web",
-        "projectPath": "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Web\\Chat.Web.csproj",
-        "packagesPath": "C:\\Users\\caioh\\.nuget\\packages\\",
-        "outputPath": "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Web\\obj\\",
+        "projectPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/Chat.Web.csproj",
+        "packagesPath": "/Users/caioborghi/.nuget/packages/",
+        "outputPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\caioh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/Users/caioborghi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://nuget.grapecity.com/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Database\\Chat.Database.csproj": {
-                "projectPath": "D:\\projetoscaio\\Pessoais\\chat\\ChatBot\\Chat.Database\\Chat.Database.csproj"
+              "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/Chat.Database.csproj": {
+                "projectPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/Chat.Database.csproj"
               }
             }
           }
@@ -120,6 +136,18 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.DataProtection.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -131,6 +159,10 @@
               "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[5.0.0, )"
             }
@@ -153,7 +185,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.100-rc.2.20479.15/RuntimeIdentifierGraph.json"
         }
       }
     }

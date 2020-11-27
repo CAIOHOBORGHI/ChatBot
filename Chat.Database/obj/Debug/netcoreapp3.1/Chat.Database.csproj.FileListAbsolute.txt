@@ -1,4 +1,12 @@
-D:\projetoscaio\Pessoais\chat\ChatBot\Chat.Database\obj\Debug\netcoreapp3.1\Chat.Database.csprojAssemblyReference.cache
-D:\projetoscaio\Pessoais\chat\ChatBot\Chat.Database\obj\Debug\netcoreapp3.1\Chat.Database.AssemblyInfoInputs.cache
-D:\projetoscaio\Pessoais\chat\ChatBot\Chat.Database\obj\Debug\netcoreapp3.1\Chat.Database.AssemblyInfo.cs
-D:\projetoscaio\Pessoais\chat\ChatBot\Chat.Database\obj\Debug\netcoreapp3.1\Chat.Database.csproj.CoreCompileInputs.cache
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/bin/Debug/netcoreapp3.1/Chat.Database.deps.json
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/bin/Debug/netcoreapp3.1/Chat.Database.runtimeconfig.json
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/bin/Debug/netcoreapp3.1/Chat.Database.runtimeconfig.dev.json
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/bin/Debug/netcoreapp3.1/Chat.Database.dll
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/bin/Debug/netcoreapp3.1/Chat.Database.pdb
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/obj/Debug/netcoreapp3.1/Chat.Database.csprojAssemblyReference.cache
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/obj/Debug/netcoreapp3.1/Chat.Database.AssemblyInfoInputs.cache
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/obj/Debug/netcoreapp3.1/Chat.Database.AssemblyInfo.cs
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/obj/Debug/netcoreapp3.1/Chat.Database.csproj.CoreCompileInputs.cache
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/obj/Debug/netcoreapp3.1/Chat.Database.dll
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/obj/Debug/netcoreapp3.1/Chat.Database.pdb
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/obj/Debug/netcoreapp3.1/Chat.Database.genruntimeconfig.cache

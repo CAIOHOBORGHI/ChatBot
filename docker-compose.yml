@@ -1,0 +1,55 @@
+version: '3.2'
+services: 
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat.web
+    depends_on: 
+      - db 
+      - rabbit
+    links: 
+      - "db"
+    environment: 
+      - DBDATABASE=chat
+      - DBHOST=db
+      - DBPASSWORD=Jobsity@2020
+      - DBPORT=1433
+      - DBUSER=sa
+      - ENGINE=mssql
+    networks:
+      - chat.network
+    ports: 
+      - "4000:80"
+    restart: on-failure
+
+  db:
+    container_name: chat.db
+    environment: 
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Jobsity@2020"
+    image: microsoft/mssql-server-linux:2017-latest
+    networks:
+      - chat.network
+    ports: 
+      - "1433:1433"
+    restart: on-failure
+    volumes:
+      - ./volumes/mssql/data:/var/opt/mssql/data
+      - ./volumes/mssql/logs:/var/opt/mssql/log
+      - ./volumes/mssql/secrets:/var/opt/mssql/secrets
+
+  rabbit:
+    container_name: chat.rabbit
+    image: rabbitmq:3-management
+    networks: 
+      - chat.network
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: on-failure
+    volumes: 
+      - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
+
+networks: 
+  chat.network:
