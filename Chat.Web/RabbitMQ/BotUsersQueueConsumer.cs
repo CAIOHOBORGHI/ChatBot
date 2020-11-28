@@ -20,12 +20,19 @@ namespace Chat.Web.RabbitMQ
             _botUsersQueueProducer = botUsersQueueProducer;
         }
 
+        /// <summary>
+        /// Search for stock info in stooq
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns>Stock with Name and Close or null</returns>
         private Stock GetStock(string code)
         {
             Stock stock = null;
             try
             {
                 string response = _client.GetStringAsync(STOCK_INFOS_URL.Replace("#code", code)).Result;
+
+                /* If other properties were needed, I could use a .csv parser */
 
                 /* Gets second line of csv */
                 string[] lines = response.Split('\n');
@@ -36,6 +43,8 @@ namespace Chat.Web.RabbitMQ
                 string stockName = properties.First();
                 properties.Reverse();
                 string closePrice = properties[1];
+
+                /* Instanciates new Stock with parsed infos */
                 stock = new Stock(stockName, double.Parse(closePrice));
             }
             catch (Exception)
@@ -48,16 +57,18 @@ namespace Chat.Web.RabbitMQ
 
         public void WaitForBotResponse()
         {
-            base.Consume<string>(Constants.BOT_USERS_QUEUE, 
-                          (code)   => 
-                          {
-                            Stock stock = GetStock(code);
-            string message = stock == null ?
-              $"Error trying to get stock {code}!" :
-              $"{stock.Name} is ${stock.Close.ToString()} per share";
-            _botUsersQueueProducer.SendToUsers(message);
-
-        });
+            base.Consume<string>
+            (
+                Constants.BOT_USERS_QUEUE, 
+                code => {
+                    Stock stock = GetStock(code);
+                    string message = 
+                        stock == null ?
+                            $"Error trying to get stock {code}!" :
+                            $"{stock.Name} is ${stock.Close} per share";
+                    _botUsersQueueProducer.SendToUsers(message);
+                }
+            );
         }
     }                           
 }
