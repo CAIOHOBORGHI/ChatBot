@@ -7,6 +7,13 @@ namespace Chat.Core.Models
 {
     public class Message
     {
+        public Message() { }
+        public Message(string text, ChatUser writter)
+        {
+            this.Text = text;
+            this.Writter = writter;
+        }
+
         [Key]
         public string Id { get; set; }
 

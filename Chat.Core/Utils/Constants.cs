@@ -1,4 +1,4 @@
-namespace Chat.Core
+namespace Chat.Core.Utils
 {
     public class Constants
     {

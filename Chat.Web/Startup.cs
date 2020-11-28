@@ -9,7 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.DataProtection;
-using Chat.Database.Models;
+using Chat.Core.Models;
+using Chat.Web.Hubs;
+using Microsoft.AspNetCore.Identity;
 
 namespace Chat.Web
 {
@@ -26,18 +28,26 @@ namespace Chat.Web
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = GetDatabaseConnectionString();
-            services.AddDbContext<ApplicationDbContext>(options => 
+
+            services.AddControllersWithViews();
+
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString)
             );
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddControllersWithViews();
-
             services.AddDefaultIdentity<ChatUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             // Stores identity keys in database
             services.AddDataProtection()
                 .PersistKeysToDbContext<ApplicationDbContext>();
+
+            services.AddSignalR();
+
+            // services.AddAuthentication(options =>
+            // {
+            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +61,7 @@ namespace Chat.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -64,9 +75,10 @@ namespace Chat.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
-          
+
         private string GetDatabaseConnectionString()
         {
             // The next lines will help us to connect to a docker database instance
@@ -89,6 +101,6 @@ namespace Chat.Web
             }
             return connectionString;
         }
-    
+
     }
 }

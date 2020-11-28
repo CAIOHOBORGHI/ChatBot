@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Database.Services
 {
@@ -25,7 +25,12 @@ namespace Chat.Database.Services
 
         public List<Message> GetLastMessages(int count = 50)
         {
-            List<Message> messages = _context.Messages?.OrderByDescending(o => o.SentAt).ToList();
+            List<Message> messages = _context
+                                        .Messages?
+                                        .Include(i => i.Writter)
+                                        .OrderByDescending(o => o.SentAt)
+                                        .Take(count)
+                                        .ToList();
             return messages;
         }
     }

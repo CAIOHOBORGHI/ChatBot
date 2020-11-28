@@ -5,17 +5,20 @@ using Chat.Core.Interfaces;
 using Chat.Core;
 using Chat.Web.Models;
 using Microsoft.Extensions.Configuration;
+using Chat.Core.Services;
+using Chat.Core.Utils;
 
 namespace Chat.Web.RabbitMQ
 {
-    public class BotUsersQueueConsumer : RabbitService, IBotUsersQueueConsumer
+    public class BotUsersQueueConsumer : ConsumerService, IBotUsersQueueConsumer
     {
         private HttpClient _client = new HttpClient();
         private IBotUsersQueueProducer _botUsersQueueProducer;
 
         // Setting const for challenge purposes, could come from Config file or database
         private const string STOCK_INFOS_URL = "https://stooq.com/q/l/?s=#code&f=sd2t2ohlcv&h&e=csv";
-        public BotUsersQueueConsumer(IConfiguration configuration, IBotUsersQueueProducer botUsersQueueProducer) : base(configuration)
+        public BotUsersQueueConsumer(IConfiguration configuration, IBotUsersQueueProducer botUsersQueueProducer) :
+            base(Helper.GetConnection(configuration, "RabbitConnectionString"))
         {
             _botUsersQueueProducer = botUsersQueueProducer;
         }
@@ -59,10 +62,11 @@ namespace Chat.Web.RabbitMQ
         {
             base.Consume<string>
             (
-                Constants.BOT_USERS_QUEUE, 
-                code => {
+                Constants.BOT_USERS_QUEUE,
+                code =>
+                {
                     Stock stock = GetStock(code);
-                    string message = 
+                    string message =
                         stock == null ?
                             $"Error trying to get stock {code}!" :
                             $"{stock.Name} is ${stock.Close} per share";
@@ -70,5 +74,5 @@ namespace Chat.Web.RabbitMQ
                 }
             );
         }
-    }                           
+    }
 }

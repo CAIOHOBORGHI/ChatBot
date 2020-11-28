@@ -1,7 +1,10 @@
+using Chat.Core.Models;
+
 namespace Chat.Core.Interfaces
 {
     public interface ICommandService
     {
-        bool IsValidCommand(string text);
+        ValidCommand GetCommandInfos(string text);
+        bool IsValidSyntaxCommand(string text);
     }
 }
