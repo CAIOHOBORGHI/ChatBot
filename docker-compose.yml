@@ -1,32 +1,7 @@
 version: '3.2'
 services: 
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile.web
-    container_name: chat.web
-    depends_on: 
-      - db 
-      - rabbit
-    environment: 
-      - DBDATABASE=chat
-      - DBHOST=db
-      - DBPASSWORD=Jobsity@2020
-      - DBPORT=1433
-      - DBUSER=sa
-      - ENGINE=mssql
-      - RabbitConnectionString="amqp://jobsity:Jobsity2020@rabbit:5672"
-    links: 
-      - db
-      - rabbit
-    networks:
-      - chat.network
-    ports: 
-      - "4000:80"
-    restart: on-failure
-
   db:
-    container_name: chat.db
+    container_name: db
     environment: 
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Jobsity@2020"
@@ -42,13 +17,14 @@ services:
       - ./volumes/mssql/secrets:/var/opt/mssql/secrets
 
   rabbit:
-    container_name: chat.rabbit
+    hostname: rabbit
+    container_name: rabbit
     image: rabbitmq:3-management
     environment: 
       RABBITMQ_DEFAULT_USER: jobsity
       RABBITMQ_DEFAULT_PASS: Jobsity2020
-    # networks: 
-    #   - chat.network
+    networks: 
+      - chat.network
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -56,18 +32,44 @@ services:
     volumes: 
       - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
 
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: web
+    depends_on: 
+      - db 
+      - rabbit
+    environment: 
+      - DBDATABASE=chat
+      - DBHOST=db
+      - DBPASSWORD=Jobsity@2020
+      - DBPORT=1433
+      - DBUSER=sa
+      - ENGINE=mssql
+      - RabbitConnectionString=amqp://jobsity:Jobsity2020@rabbit:5672
+    links: 
+      - db
+      - rabbit
+    networks:
+      - chat.network
+    ports: 
+      - "4000:80"
+    restart: on-failure
+
   worker:
     build:
       context: .
       dockerfile: Dockerfile.worker
-    container_name: chat.worker
+    container_name: worker
     depends_on: 
       - rabbit
     environment: 
-      - RabbitConnectionString="amqp://jobsity:Jobsity2020@rabbit:5672"
+      - RabbitConnectionString=amqp://jobsity:Jobsity2020@rabbit:5672
     links: 
       - rabbit
     networks:
       - chat.network
+    restart: on-failure
 networks: 
   chat.network:

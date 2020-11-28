@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Chat.Worker.RabbitMQ;
 
 namespace Chat.Worker
 {
     class Program
     {
-        static void Main(string[] args)
+        static readonly CancellationTokenSource Cts = new CancellationTokenSource();
+        static async Task Main(string[] args)
         {
             //TODO: Implement appSettings.json
-            // string rabbitConnection = Environment.GetEnvironmentVariable("RabbitConnectionString");
-            string rabbitConnection = "amqp://jobsity:Jobsity2020@localhost:5672";
+            string rabbitConnection = Environment.GetEnvironmentVariable("RabbitConnectionString");
+
             if (string.IsNullOrWhiteSpace(rabbitConnection))
             {
                 Console.WriteLine("Rabbit`s connection string is required!");
@@ -21,6 +24,7 @@ namespace Chat.Worker
             BotUsersQueueProducer producer = new BotUsersQueueProducer(rabbitConnection);
             UserBotQueueConsumer consumer = new UserBotQueueConsumer(rabbitConnection, producer);
             consumer.WaitForStockCode();
+            await Task.Delay(Timeout.Infinite, Cts.Token).ConfigureAwait(false);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Chat.Core.Services
         private IModel _channel;
         public ConsumerService(string connectionString)
         {
+            Console.WriteLine("ConnectionString: " + connectionString);
             _connectionFactory = new ConnectionFactory
             {
                 Uri = new Uri(connectionString)
@@ -22,10 +23,8 @@ namespace Chat.Core.Services
 
         public void Consume<T>(string queue, Action<T> execute)
         {
-            Console.WriteLine("Starting connection...");
             _connection = _connectionFactory.CreateConnection();
             _channel = _connection.CreateModel();
-            Console.WriteLine("Connection started!");
             _channel.QueueDeclare(queue,
                 durable: true,
                 exclusive: false,
@@ -33,13 +32,11 @@ namespace Chat.Core.Services
                 arguments: null
             );
 
-            Console.WriteLine("Queue declared!");
             EventingBasicConsumer consumer = new EventingBasicConsumer(_channel);
             consumer.Received += (sender, e) =>
             {
                 byte[] body = e.Body.ToArray();
                 T queueObject = JsonSerializer.Deserialize<T>(body);
-                Console.WriteLine("Message received -> " + queueObject.ToString());
                 execute(queueObject);
             };
 
@@ -48,8 +45,7 @@ namespace Chat.Core.Services
             consumer.Unregistered += OnConsumerUnregistered;
             consumer.ConsumerCancelled += OnConsumerCanceled;
             _channel.BasicConsume(queue, true, consumer);
-            Console.WriteLine("Waiting for message...");
-            //Console.ReadLine();
+            Console.WriteLine("Waiting for new messages...");
         }
 
         public void Dispose()

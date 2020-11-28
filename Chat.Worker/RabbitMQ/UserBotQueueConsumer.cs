@@ -55,7 +55,6 @@ namespace Chat.Worker.RabbitMQ
                 /* Produces message */
                 _producer.SendToUsers(message);
             });
-            Console.ReadLine();
         }
     }
 }
