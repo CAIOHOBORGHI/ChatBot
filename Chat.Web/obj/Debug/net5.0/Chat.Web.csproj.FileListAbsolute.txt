@@ -113,3 +113,7 @@
 /Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/obj/Debug/net5.0/ref/Chat.Web.dll
 /Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/obj/Debug/net5.0/Chat.Web.pdb
 /Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/obj/Debug/net5.0/Chat.Web.genruntimeconfig.cache
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/obj/Debug/net5.0/Razor/Views/Chat/Index.cshtml.g.cs
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/bin/Debug/net5.0/Chat.Core.dll
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/bin/Debug/net5.0/Chat.Core.pdb
+/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/bin/Debug/net5.0/RabbitMQ.Client.dll

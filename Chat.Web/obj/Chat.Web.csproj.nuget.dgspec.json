@@ -4,6 +4,67 @@
     "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Web/Chat.Web.csproj": {}
   },
   "projects": {
+    "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Core/Chat.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Core/Chat.Core.csproj",
+        "projectName": "Chat.Core",
+        "projectPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Core/Chat.Core.csproj",
+        "packagesPath": "/Users/caioborghi/.nuget/packages/",
+        "outputPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Core/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/caioborghi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.100-rc.2.20479.15/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/Chat.Database.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -20,15 +81,19 @@
           "/Users/caioborghi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Core/Chat.Core.csproj": {
+                "projectPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Core/Chat.Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -38,8 +103,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "Microsoft.AspNetCore.DataProtection.EntityFrameworkCore": {
               "target": "Package",
@@ -80,12 +145,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.2, 3.1.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -120,6 +179,9 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Core/Chat.Core.csproj": {
+                "projectPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Core/Chat.Core.csproj"
+              },
               "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/Chat.Database.csproj": {
                 "projectPath": "/Users/caioborghi/projetoscaio/pessoais/chat/ChatBot/Chat.Database/Chat.Database.csproj"
               }
@@ -165,6 +227,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.2.1, )"
             }
           },
           "imports": [
