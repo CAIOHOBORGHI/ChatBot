@@ -1,7 +1,18 @@
-@page
+@using System.Security.Claims
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Chat Room";
+    var claimsIdentity = User.Identity as ClaimsIdentity;
+    string userID = "";
+    if (claimsIdentity != null)
+    {
+        var userIdClaim = claimsIdentity.Claims.FirstOrDefault(f => f.Type == ClaimTypes.NameIdentifier);
+        if (userIdClaim != null)
+            userID = userIdClaim.Value;
+    }
 }
+<script type="text/javascript">
+    var loggedUserId = '@userID';
+</script>
 
 <div class="container">
     <div class="row">&nbsp;</div>
@@ -30,5 +41,5 @@
         <ul id="messagesList"></ul>
     </div>
 </div>
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/lib/signalr/signalr.js"></script>
 <script src="~/js/chat.js"></script>

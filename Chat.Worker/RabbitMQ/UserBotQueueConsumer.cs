@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 
@@ -31,7 +32,7 @@ namespace Chat.Worker.RabbitMQ
                 string secondLine = lines[1];
 
                 /* Get properties */
-                string[] properties = secondLine.Split(",");
+                List<string> properties = secondLine.Split(",").ToList();
                 string stockName = properties.First();
                 properties.Reverse();
                 string closePrice = properties[1];
@@ -46,6 +47,7 @@ namespace Chat.Worker.RabbitMQ
 
         public void WaitForStockCode()
         {
+            Console.WriteLine("Waiting for stock code...");
             base.Consume<string>(Constants.USER_BOT_QUEUE, (code) =>
             {
                 string message = GetStockMessage(code);

@@ -18,6 +18,12 @@ namespace Chat.Core.Services
         {
             using IConnection connection = _connectionFactory.CreateConnection();
             using IModel channel = connection.CreateModel();
+            channel.QueueDeclare(queue,
+               durable: true,
+               exclusive: false,
+               autoDelete: false,
+               arguments: null
+           );
             byte[] body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
             channel.BasicPublish("", queue, null, body);
         }

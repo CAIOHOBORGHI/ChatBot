@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Chat.Web.Controllers
 {
-    [Route("api/[controller]/[action]")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

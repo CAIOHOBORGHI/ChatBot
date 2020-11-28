@@ -6,6 +6,6 @@ namespace Chat.Core.Entities
     {
         public string Text { get; set; }
 
-        public IdentityUser Writter { get; set; }
+        public string UserID { get; set; }
     }
 }

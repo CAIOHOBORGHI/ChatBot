@@ -7,72 +7,52 @@ using Chat.Web.Models;
 using Microsoft.Extensions.Configuration;
 using Chat.Core.Services;
 using Chat.Core.Utils;
+using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.AspNetCore.SignalR;
+using Chat.Web.Hubs;
 
 namespace Chat.Web.RabbitMQ
 {
-    public class BotUsersQueueConsumer : ConsumerService, IBotUsersQueueConsumer
+    public class BotUsersQueueConsumer : BackgroundService, IBotUsersQueueConsumer
     {
         private HttpClient _client = new HttpClient();
-        private IBotUsersQueueProducer _botUsersQueueProducer;
+        private IConsumerService _consumerService;
+        private IHubContext<ChatHub> _hubContext;
 
-        // Setting const for challenge purposes, could come from Config file or database
-        private const string STOCK_INFOS_URL = "https://stooq.com/q/l/?s=#code&f=sd2t2ohlcv&h&e=csv";
-        public BotUsersQueueConsumer(IConfiguration configuration, IBotUsersQueueProducer botUsersQueueProducer) :
-            base(Helper.GetConnection(configuration, "RabbitConnectionString"))
+        public BotUsersQueueConsumer(IConfiguration configuration, IHubContext<ChatHub> hubContext) :
+            base()
         {
-            _botUsersQueueProducer = botUsersQueueProducer;
+            _consumerService = new ConsumerService(Helper.GetConnection(configuration, "RabbitConnectionString"));
+            _hubContext = hubContext;
         }
 
-        /// <summary>
-        /// Search for stock info in stooq
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns>Stock with Name and Close or null</returns>
-        private Stock GetStock(string code)
-        {
-            Stock stock = null;
-            try
-            {
-                string response = _client.GetStringAsync(STOCK_INFOS_URL.Replace("#code", code)).Result;
-
-                /* If other properties were needed, I could use a .csv parser */
-
-                /* Gets second line of csv */
-                string[] lines = response.Split('\n');
-                string secondLine = lines[1];
-
-                /* Get properties */
-                string[] properties = secondLine.Split(",");
-                string stockName = properties.First();
-                properties.Reverse();
-                string closePrice = properties[1];
-
-                /* Instanciates new Stock with parsed infos */
-                stock = new Stock(stockName, double.Parse(closePrice));
-            }
-            catch (Exception)
-            {
-                // TODO: Implement logging
-                // "Error trying to get stock!";
-            }
-            return stock;
-        }
 
         public void WaitForBotResponse()
         {
-            base.Consume<string>
+            _consumerService.Consume<string>
             (
                 Constants.BOT_USERS_QUEUE,
-                code =>
+                async botMessage =>
                 {
-                    Stock stock = GetStock(code);
-                    string message =
-                        stock == null ?
-                            $"Error trying to get stock {code}!" :
-                            $"{stock.Name} is ${stock.Close} per share";
-                    _botUsersQueueProducer.SendToUsers(message);
+                    await _hubContext.Clients.All.SendAsync("receive", botMessage);
                 }
             );
+        }
+
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            stoppingToken.ThrowIfCancellationRequested();
+
+            this.WaitForBotResponse();
+            return Task.CompletedTask;
+        }
+
+        public override void Dispose()
+        {
+            _consumerService.Dispose();
+            base.Dispose();
         }
     }
 }

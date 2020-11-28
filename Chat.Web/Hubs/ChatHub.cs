@@ -12,11 +12,13 @@ namespace Chat.Web.Hubs
     {
         private ICommandService _commandService;
         private IMessageService _messageService;
+        private IUserService _userService;
         private IUserBotQueueProducer _userBotQueueProducer;
-        public ChatHub(ICommandService commandService, IMessageService messageService, IUserBotQueueProducer userBotQueueProducer)
+        public ChatHub(ICommandService commandService, IMessageService messageService, IUserService userService, IUserBotQueueProducer userBotQueueProducer)
         {
             _commandService = commandService;
             _messageService = messageService;
+            _userService = userService;
             _userBotQueueProducer = userBotQueueProducer;
         }
 
@@ -43,11 +45,11 @@ namespace Chat.Web.Hubs
             else
             {
                 /* If is not a valid command syntax, save to database and broadcast */
-                ChatUser chatUser = (ChatUser)chatMessage.Writter;
+                string userId = chatMessage.UserID;
+                ChatUser chatUser = _userService.GetUser(userId);
                 Message message = new Message(chatMessage.Text, chatUser);
                 _messageService.AddMessage(message);
                 await Clients.All.SendAsync("receive", chatMessage);
-
             }
         }
     }

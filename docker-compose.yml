@@ -3,13 +3,11 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.web
     container_name: chat.web
     depends_on: 
       - db 
       - rabbit
-    links: 
-      - "db"
     environment: 
       - DBDATABASE=chat
       - DBHOST=db
@@ -17,6 +15,10 @@ services:
       - DBPORT=1433
       - DBUSER=sa
       - ENGINE=mssql
+      - RabbitConnectionString="amqp://jobsity:Jobsity2020@rabbit:5672"
+    links: 
+      - db
+      - rabbit
     networks:
       - chat.network
     ports: 
@@ -42,8 +44,11 @@ services:
   rabbit:
     container_name: chat.rabbit
     image: rabbitmq:3-management
-    networks: 
-      - chat.network
+    environment: 
+      RABBITMQ_DEFAULT_USER: jobsity
+      RABBITMQ_DEFAULT_PASS: Jobsity2020
+    # networks: 
+    #   - chat.network
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -51,5 +56,18 @@ services:
     volumes: 
       - ./volumes/rabbit:/var/lib/rabbitmq/mnesia
 
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: chat.worker
+    depends_on: 
+      - rabbit
+    environment: 
+      - RabbitConnectionString="amqp://jobsity:Jobsity2020@rabbit:5672"
+    links: 
+      - rabbit
+    networks:
+      - chat.network
 networks: 
   chat.network:

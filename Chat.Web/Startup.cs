@@ -12,6 +12,10 @@ using Microsoft.AspNetCore.DataProtection;
 using Chat.Core.Models;
 using Chat.Web.Hubs;
 using Microsoft.AspNetCore.Identity;
+using Chat.Core.Interfaces;
+using Chat.Database.Services;
+using Chat.Web.Services;
+using Chat.Web.RabbitMQ;
 
 namespace Chat.Web
 {
@@ -44,10 +48,16 @@ namespace Chat.Web
 
             services.AddSignalR();
 
-            // services.AddAuthentication(options =>
-            // {
-            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            // });
+            /* Web only services */
+            services.AddSingleton<ICommandService, CommandService>();
+
+            /* Database services */
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IUserService, UserService>();
+
+            /* Rabbit services */
+            services.AddSingleton<IUserBotQueueProducer, UserBotQueueProducer>();
+            services.AddHostedService<BotUsersQueueConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,7 +85,7 @@ namespace Chat.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                endpoints.MapHub<ChatHub>("/chat");
+                endpoints.MapHub<ChatHub>("/chatter");
             });
         }
 
