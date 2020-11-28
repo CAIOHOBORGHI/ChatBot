@@ -28,7 +28,7 @@ namespace Chat.Database.Services
             List<Message> messages = _context
                                         .Messages?
                                         .Include(i => i.Writter)
-                                        .OrderByDescending(o => o.SentAt)
+                                        .OrderBy(o => o.SentAt)
                                         .Take(count)
                                         .ToList();
             return messages;

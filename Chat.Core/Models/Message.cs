@@ -17,7 +17,7 @@ namespace Chat.Core.Models
         [Key]
         public string Id { get; set; }
 
-        public DateTime SentAt { get; set; } = new DateTime();
+        public DateTime SentAt { get; set; } = DateTime.Now;
 
         [Required]
         public string Text { get; set; }

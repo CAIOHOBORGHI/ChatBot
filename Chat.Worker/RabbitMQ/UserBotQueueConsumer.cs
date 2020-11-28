@@ -48,7 +48,6 @@ namespace Chat.Worker.RabbitMQ
 
         public void WaitForStockCode()
         {
-            Console.WriteLine("Waiting for stock code...");
             base.Consume<string>(Constants.USER_BOT_QUEUE, (code) =>
             {
                 string message = GetStockMessage(code);

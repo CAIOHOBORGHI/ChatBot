@@ -25,37 +25,38 @@
     var loggedUserName = '@userName';
 </script>
 
-<div class="container">
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-2">Message</div>
-        <div class="col-4"><input type="text" id="messageInput" /></div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-6">
-            <input type="button" id="sendButton" value="Send Message" />
+<h1>Real-time chat room</h1>
+
+<div id="messagesList">
+    @foreach (var message in Model)
+    {
+        string cssClass = "message";
+        if (message.UserID == userID)
+        {
+            cssClass = "message mine offset-7";
+        }
+        <div class="container">
+            <div class="row">
+                <div class="col-5 @cssClass">
+                    <p>@message.Text</p>
+                    <div class="row">
+                        <div class="col-6 sender">
+                            @message.UserName
+                        </div>
+                        <div class="col-6 time">
+                            At @message.SentAt.ToShortDateString() - @message.SentAt.ToShortTimeString()
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    }
 </div>
-<div class="row">
-    <div class="col-12">
-        <hr />
-    </div>
-</div>
-<div class="row">
-    <div class="col-6">
-        <ul id="messagesList">
-            @foreach (var message in Model)
-            {
-                string cssClass = "him";
-                if (message.UserID == userID)
-                {
-                    cssClass = "me";
-                }
-                <li class=@cssClass>@message.Text - @message.SentAt.ToShortDateString()</li>
-            }
-        </ul>
+
+<div class="input-group mb-3">
+    <input type="text" id="messageInput" class="form-control" placeholder="Type your message" aria-label="Type your message" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" id="sendButton" type="button">Button</button>
     </div>
 </div>
 <script src="~/lib/signalr/signalr.js"></script>

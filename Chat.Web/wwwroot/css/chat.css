@@ -1,38 +1,35 @@
-ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.message {
+    font-size: 18px;
+    font-weight: 500;
+    border: 5px solid #07c6f0;
+    background-color: #07c6f0;
+    color: rgb(0, 0, 0);
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
-ul li{
-  display:inline-block;
-  clear: both;
-  padding: 20px;
-  border-radius: 30px;
-  margin-bottom: 2px;
-  font-family: Helvetica, Arial, sans-serif;
+.message div{
+    font-size: 12px;
 }
 
-.him{
-  background: #eee;
-  float: left;
+.message .time{
+    float: right;
+    text-align: right;
 }
 
-.me{
-  float: right;
-  background: #0084ff;
-  color: #fff;
+    .message.mine {
+        border: 5px solid #02cf6c;
+        background-color: #02cf6c;
+    }
+
+#messagesList{
+    height: 70vh;
+    overflow-y: scroll;
 }
 
-.him + .me{
-  border-bottom-right-radius: 5px;
-}
-
-.me + .me{
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.me:last-of-type {
-  border-bottom-right-radius: 30px;
+h1 {
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: monospace;
 }
