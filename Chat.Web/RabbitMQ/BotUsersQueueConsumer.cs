@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.AspNetCore.SignalR;
 using Chat.Web.Hubs;
+using Chat.Core.Entities;
 
 namespace Chat.Web.RabbitMQ
 {
@@ -31,11 +32,14 @@ namespace Chat.Web.RabbitMQ
 
         public void WaitForBotResponse()
         {
-            _consumerService.Consume<string>
+            _consumerService.Consume<ChatMessage>
             (
                 Constants.BOT_USERS_QUEUE,
                 async botMessage =>
                 {
+                    /* It wasnt clear in the docs if I should save in the database the response for the command
+                     * So, As the request command isn`t being saved, I didnt save the response
+                     */
                     await _hubContext.Clients.All.SendAsync("receive", botMessage);
                 }
             );

@@ -36,12 +36,13 @@ namespace Chat.Worker.RabbitMQ
                 string stockName = properties.First();
                 properties.Reverse();
                 string closePrice = properties[1];
-
+                if (closePrice == "N/D")
+                    throw new Exception("Not found!");
                 return $"{stockName} quote is ${closePrice} per share";
             }
             catch (Exception ex)
             {
-                return "Error trying to get stock!\n" + ex.Message;
+                return $"Error trying to get stock \"{code}\": " + ex.Message;
             }
         }
 
@@ -54,6 +55,7 @@ namespace Chat.Worker.RabbitMQ
                 /* Produces message */
                 _producer.SendToUsers(message);
             });
+            Console.ReadLine();
         }
     }
 }

@@ -6,9 +6,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chatter").build();
 document.getElementById("sendButton").disabled = true;
 
 connection.on("receive", function (message) {
-    debugger;
-    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    var encodedMsg = user + " says " + msg;
+    var encodedMsg = message.userName + " says " + message.text;
     var li = document.createElement("li");
     li.textContent = encodedMsg;
     document.getElementById("messagesList").appendChild(li);
@@ -21,12 +19,14 @@ connection.start().then(function () {
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
-    var user = document.getElementById("userInput").value;
     var message = document.getElementById("messageInput").value;
     var chatMessage = {
-
+        text: message,
+        userId: loggedUserId,
+        userName: loggedUserName
     };
-    connection.invoke("SendAll", user, message).catch(function (err) {
+    debugger;
+    connection.invoke("SendAll", chatMessage).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();

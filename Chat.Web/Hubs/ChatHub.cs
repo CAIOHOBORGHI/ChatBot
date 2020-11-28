@@ -28,29 +28,47 @@ namespace Chat.Web.Hubs
         /// <param name="chatMessage">Message object with text and Writter</param>
         public async void SendAll(ChatMessage chatMessage)
         {
-            if (_commandService.IsValidSyntaxCommand(chatMessage.Text))
+
+            if (_commandService.IsCommand(chatMessage.Text))
             {
-                /* If command is valid, get infos */
-                ValidCommand command = _commandService.GetCommandInfos(chatMessage.Text);
-                if (command == null)
+                CommandInfos infos = _commandService.GetCommandInfos(chatMessage.Text);
+
+                /* Im broadcasting user command, but not saving it to database */
+                await Broadcast(chatMessage);
+
+                if (infos.Error != null)
                 {
-                    /* In case command doesnt exists, sends feedback */
-                    await Clients.All.SendAsync("receive", "Sorry, command not found!");
+                    await Broadcast(AdminMessage(infos.Error));
                 }
                 else
                 {
-                    _userBotQueueProducer.SearchStock(command.Parameter);
+                    _userBotQueueProducer.SearchStock(infos.Parameter);
                 }
             }
             else
             {
-                /* If is not a valid command syntax, save to database and broadcast */
+                /* If is not a command, save to database and broadcast */
                 string userId = chatMessage.UserID;
                 ChatUser chatUser = _userService.GetUser(userId);
                 Message message = new Message(chatMessage.Text, chatUser);
                 _messageService.AddMessage(message);
-                await Clients.All.SendAsync("receive", chatMessage);
+                chatMessage.SentAt = message.SentAt;
+                await Broadcast(chatMessage);
             }
+        }
+
+        private ChatMessage AdminMessage(string text)
+        {
+            return new ChatMessage
+            {
+                Text = text,
+                UserName = "Administrator",
+            };
+        }
+
+        private async Task Broadcast(ChatMessage chatMessage)
+        {
+            await Clients.All.SendAsync("receive", chatMessage);
         }
     }
 }

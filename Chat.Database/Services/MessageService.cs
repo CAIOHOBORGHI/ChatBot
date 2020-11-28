@@ -17,7 +17,7 @@ namespace Chat.Database.Services
 
         public Message AddMessage(Message message)
         {
-            message.Id = (new Guid()).ToString();
+            message.Id = (Guid.NewGuid()).ToString();
             _context.Messages.Add(message);
             _context.SaveChanges();
             return message;

@@ -1,3 +1,4 @@
+using Chat.Core.Entities;
 using Chat.Core.Interfaces;
 using Chat.Core.Utils;
 using Chat.Core.Services;
@@ -13,7 +14,12 @@ namespace Chat.Worker.RabbitMQ
 
         public void SendToUsers(string message)
         {
-            base.Produce<string>(Constants.BOT_USERS_QUEUE, message);
+            ChatMessage chatMessage = new ChatMessage
+            {
+                Text = message,
+                UserName = "Bot"
+            };
+            base.Produce<ChatMessage>(Constants.BOT_USERS_QUEUE, chatMessage);
         }
     }
 }

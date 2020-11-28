@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Chat.Core;
+using Chat.Core.Entities;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
 
@@ -7,32 +8,53 @@ namespace Chat.Web.Services
 {
     public class CommandService : ICommandService
     {
-        // Mocked list with command and queue, easy to implement more commands
-        private List<string> _mockCommands = new List<string>() { "/stock" };
+        private CommandInfos _commandInfos = new CommandInfos();
+        
+        private List<string> _mockedCommandList = new List<string>() { "/stock" };
 
-        public ValidCommand GetCommandInfos(string text)
+        public string GetCommandError(string text)
         {
+            if (!text.Contains("="))
+                return "Error! I guess you forgot to insert '='";
+
             string[] splitter = text.Split("=");
             string command = splitter[0];
-            if (!_mockCommands.Contains(command))
-                return null;
+            string param = splitter[1];
+            if (string.IsNullOrWhiteSpace(command.Replace("/", "")))
+                return "Command can't be null!";
 
-            string parameter = splitter[1];
+            if (!_mockedCommandList.Contains(command))
+                return $"'{command}' command not found!";
 
-            ValidCommand validCommand = new ValidCommand
-            {
-                Command = command,
-                Parameter = parameter,
-            };
-            return validCommand;
+            if (string.IsNullOrWhiteSpace(param))
+                return "Parameter can't be null!";
+
+            return null;
         }
 
-        public bool IsValidSyntaxCommand(string text)
+        public CommandInfos GetCommandInfos(string text)
         {
-            if (!text.StartsWith("/") || !text.Contains("="))
-                return false;
+            string error = GetCommandError(text);
+            if (error == null)
+            {
+                string[] splitter = text.Split("=");
+                string command = splitter[0];
+                if (!_mockedCommandList.Contains(command))
+                    return null;
 
-            return true;
+                string parameter = splitter[1];
+                _commandInfos.Command = command;
+                _commandInfos.Parameter = parameter;
+            }
+
+            _commandInfos.Error = error;
+
+            return _commandInfos;
+        }
+
+        public bool IsCommand(string text)
+        {
+            return text.StartsWith("/");
         }
     }
 }
