@@ -1,4 +1,6 @@
 @using System.Security.Claims
+@using Chat.Core.Entities
+@model List<ChatMessage>
 @{
     ViewData["Title"] = "Chat Room";
     var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -14,6 +16,10 @@
             userName = userNameClaim.Value;
     }
 }
+
+<head>
+    <link rel="stylesheet" href="~/css/chat.css" />
+</head>
 <script type="text/javascript">
     var loggedUserId = '@userID';
     var loggedUserName = '@userName';
@@ -39,7 +45,17 @@
 </div>
 <div class="row">
     <div class="col-6">
-        <ul id="messagesList"></ul>
+        <ul id="messagesList">
+            @foreach (var message in Model)
+            {
+                string cssClass = "him";
+                if (message.UserID == userID)
+                {
+                    cssClass = "me";
+                }
+                <li class=@cssClass>@message.Text - @message.SentAt.ToShortDateString()</li>
+            }
+        </ul>
     </div>
 </div>
 <script src="~/lib/signalr/signalr.js"></script>
