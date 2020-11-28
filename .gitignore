@@ -80,3 +80,7 @@ artifacts/
 
 #Volumes
 volumes/*
+
+Chat.Web/obj/
+
+Chat.Database/obj/
