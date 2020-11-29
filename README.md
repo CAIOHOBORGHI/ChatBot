@@ -41,7 +41,7 @@ or
   - Notes 
     - Web and Worker containers will be restarted until RabbitMQ server container is ready for connections</i>
     - If you´re running on Windows, you need to set COMPOSE_CONVERT_WINDOWS_PATHS=1
-    - If needed to scale the worker container, just remove the **container-name** on *docker-compose.yml* and run
+    - If you need to scale the worker container, just remove the **container-name** on *docker-compose.yml* and run
       ```
       docker-compose up --scale worker=3
       ```
