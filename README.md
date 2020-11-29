@@ -1,7 +1,7 @@
 # ChatBot Web Application
 A chat bot web application focused on the high quality <b>back-end</b> code.
 
-## Features
+### Features
 - :lock: &nbsp;Authentication with IdentityServer 
 - :speech_balloon: &nbsp;Chat Room for logged users
 - :chart_with_upwards_trend: &nbsp;Command **/stock=*code*** gets price of stock from Stooq
@@ -9,16 +9,16 @@ A chat bot web application focused on the high quality <b>back-end</b> code.
 - :stopwatch: &nbsp;Messages are ordered by time (older ones are shown in top)
 - :boom: &nbsp;Only 50 messages are displayed in the chat ( No need to reload the page, js makes the magic in real-time )
 
-## Built with
+### Built with
 * [Docker :whale:](https://docker.com) 
 * [Entity Framework Core](https://docs.microsoft.com/en-us/ef/)
 * [IdentityServer](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore)
 * [.NET 5](https://docs.microsoft.com/pt-br/dotnet/core/dotnet-five)
 * [RabbitMQ](https://www.rabbitmq.com/)
 
-# Getting Started
+## Getting Started
 
-## Prerequisites
+### Prerequisites
 - Docker
 - Docker Compose
 
@@ -28,9 +28,8 @@ or
 - Microsoft SQL Server 2017
 - RabbitMQ
 
-# Usage
-
-## With docker
+## Usage
+### With docker
 1. In the root folder, run 
   ```
   docker-compose build
@@ -41,12 +40,11 @@ or
   ```
 <i>Note: Web and Worker containers will be restarted until RabbitMQ server container is ready for connections</i>
 
-3.
-- Open your browser in http://localhost:4000 
-- Create your account
-- Start chatting
+3. Open your browser in http://localhost:4000 
+4. Create your account
+5. Start chatting
 
-## Without docker
+### Without docker
 1. Start your RabbitMQ Server + MSSQL Server 2017
 2. Update the appSettings in Chat.Web/appsettings.json and Chat.Worker/appsettings.json
 3. In the root folder, run
@@ -66,19 +64,18 @@ or
   dotnet run
   ```
 
-6. 
-- Open your browser in http://localhost:5000 
-- Create your account
-- Start chatting
+6. Open your browser in http://localhost:5000 
+7. Create your account
+8. Start chatting
 
-## Tests
+### Tests
 On the project root, run this command to run all tests
   ```
   cd Chat.Tests
   dotnet test
   ```
   
-# Contact
+## Contact
 [![LinkedIn][linkedin-shield]][linkedin-url] 
 
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
