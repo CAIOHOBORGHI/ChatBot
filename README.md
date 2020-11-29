@@ -36,9 +36,11 @@ or
   ```
 2. Then you can set it all up with
   ```
-  docker-compose up
+  docker-compose up -d
   ```
-<i>Note: Web and Worker containers will be restarted until RabbitMQ server container is ready for connections</i>
+  - Notes 
+    - Web and Worker containers will be restarted until RabbitMQ server container is ready for connections</i>
+    - If you´re running on Windows, you need to set COMPOSE_CONVERT_WINDOWS_PATHS=1
 
 3. Open your browser in http://localhost:4000 
 4. Create your account
