@@ -14,7 +14,6 @@ namespace Chat.Core.Services
         private IModel _channel;
         public ConsumerService(string connectionString)
         {
-            Console.WriteLine("ConnectionString: " + connectionString);
             _connectionFactory = new ConnectionFactory
             {
                 Uri = new Uri(connectionString)
@@ -23,6 +22,7 @@ namespace Chat.Core.Services
 
         public void Consume<T>(string queue, Action<T> execute)
         {
+            Console.WriteLine($"Connecting in {_connectionFactory.Uri}");
             _connection = _connectionFactory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.QueueDeclare(queue,
@@ -45,7 +45,7 @@ namespace Chat.Core.Services
             consumer.Unregistered += OnConsumerUnregistered;
             consumer.ConsumerCancelled += OnConsumerCanceled;
             _channel.BasicConsume(queue, true, consumer);
-            Console.WriteLine("Waiting for new messages...");
+            Console.WriteLine("Connected! Waiting for new messages...");
         }
 
         public void Dispose()
