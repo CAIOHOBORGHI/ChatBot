@@ -69,8 +69,7 @@ connection.on("receive", function (message) {
     scrollToLastMessages();
 
     /* Ensures that only 50 messages are displayed */
-    if (messagesList.children.length > 50)
-    {
+    if (messagesList.children.length > 50) {
         let first = messagesList.children[0];
         messagesList.remove(first);
     }
@@ -87,8 +86,8 @@ connection.start().then(function () {
 document.querySelector("#messageInput").addEventListener('keypress', function (e) {
     if (e.key == 'Enter') {
         sendMessage();
-        document.querySelector("#messageInput").textContent = "";
-        e.preventDefault(); 
+        document.querySelector("#messageInput").value = "";
+        e.preventDefault();
     }
 })
 
