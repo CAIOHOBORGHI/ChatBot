@@ -41,10 +41,15 @@ or
   - Notes 
     - Web and Worker containers will be restarted until RabbitMQ server container is ready for connections</i>
     - If you´re running on Windows, you need to set COMPOSE_CONVERT_WINDOWS_PATHS=1
+    - If needed to scale the worker container, just remove the **container-name** on *docker-compose.yml* and run
+      ```
+      docker-compose up --scale worker=3
+      ```
 
 3. Open your browser in http://localhost:4000 
 4. Create your account
 5. Start chatting
+    
 
 ### Without docker
 1. Start your RabbitMQ Server + MSSQL Server 2017
@@ -76,6 +81,7 @@ On the project root, run this command to run all tests
   cd Chat.Tests
   dotnet test
   ```
+ 
   
 ## Contact
 [![LinkedIn][linkedin-shield]][linkedin-url] 
