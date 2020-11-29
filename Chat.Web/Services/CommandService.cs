@@ -16,7 +16,7 @@ namespace Chat.Web.Services
         public string GetCommandError(string text)
         {
             if (!text.Contains("="))
-                return "Error! I guess you forgot to insert '='";
+                return Constants.ERROR_NULL_PARAMETER_INDICATOR;
 
             string[] splitter = text.Split("=");
             string command = splitter[0];
